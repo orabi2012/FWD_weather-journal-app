@@ -19,8 +19,15 @@ const cors = require("cors");
 app.use(cors());
 
 
+//get
+app.get("/all", function (req, res) {
+  
+res.status(200).send(dataArray);
+console.log(dataArray);
+});
+
 // Initialize the main project folder
-app.use(express.static('website'));
+ app.use(express.static('website'));
 
 
 // Setup Server
@@ -28,12 +35,7 @@ const port = 8080;
 
 
 
-  //get
-  app.get("/all", function (req, res) {
-      console.log(dataArray);
-    res.status(200).send(dataArray);
-    console.log(data);
-  });
+  
 
 
   const server = app.listen(port, listening);

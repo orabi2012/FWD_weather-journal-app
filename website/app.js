@@ -5,54 +5,56 @@ const ApiUnit = 'metric'
 
 //get html Elements by ID
 const btnGenerate = document.getElementById('btnGenerate');
-
-
-//const txtDate = document.getElementById('date')
-//const txtTemp = document.getElementById('temp')
-
 const txtContent = document.getElementById('content')
 
 
 //event listiner
+btnGenerate.addEventListener('click' , clickBtn )
 
-btnGenerate.addEventListener('click' , async () => {
-const ZipCode = document.getElementById('zip').value
-const txtfeelings = document.getElementById("feelings").value
-let  city = ''
-
-
-const weatherUrl = `${basicUrl}zip=${ZipCode},us&appid=${ApiKey}&units=${ApiUnit}`
-
-const Data = await  fetch(weatherUrl)
-
-if (Data.status === 200){
-
-    const jdata = await Data.json()
-
-    temp = `${jdata["main"]["temp"]} °C `
+//async function will run by clicking the button
+async function clickBtn () {
     
-      city = jdata.name 
+    //get ZIP code from UI
+    const ZipCode = document.getElementById('zip').value
+    //get Feeling From UI
+    const txtfeelings = document.getElementById("feelings").value
+    //combine weather API request URL
+    const weatherUrl = `${basicUrl}zip=${ZipCode},us&appid=${ApiKey}&units=${ApiUnit}`
 
+    //variable to store city name
+    let  city = ''
     
     
-    //console.log( city + "=" + temp)
-    txtContent.style.backgroundColor="white"
-
-}else {
-
-    console.log( 'Not found')
-    txtContent.innerHTML = `Not found`
-    txtContent.style.backgroundColor="red"
-
-}
-
-const response = await postWeatherData("/setTemp", { date: newDate , city : city, temp: temp , feelins: txtfeelings });
-txtContent.innerHTML = `City :- ${response.city}   <hr>
-                       Temp :- ${response.temp} <hr>
-                        date :- ${response.date} <hr>
-                       feeling :- ${response.feelins}`
-
-})
+    const Data = await  fetch(weatherUrl)
+    
+    if (Data.status === 200){
+    
+        const jdata = await Data.json()
+    
+        temp = `${jdata["main"]["temp"]} °C `
+        
+          city = jdata.name 
+    
+        
+        
+        //console.log( city + "=" + temp)
+        txtContent.style.backgroundColor="white"
+    
+    }else {
+    
+        console.log( 'Not found')
+        txtContent.innerHTML = `Not found`
+        txtContent.style.backgroundColor="red"
+    
+    }
+    
+    const response = await postWeatherData("/setTemp", { date: newDate , city : city, temp: temp , feelins: txtfeelings });
+    txtContent.innerHTML = `City :- ${response.city}   <hr>
+                           Temp :- ${response.temp} <hr>
+                            date :- ${response.date} <hr>
+                           feeling :- ${response.feelins}`
+    
+    }
 
 
 const postWeatherData = async (url = "", data = {}) => {

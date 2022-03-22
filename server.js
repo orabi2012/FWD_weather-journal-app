@@ -1,5 +1,5 @@
 // Setup empty JS object to act as endpoint for all routes
-projectData = {date: "" , temp : "" , feelins : ""};
+projectData = {date: "" ,city : "" , temp : "" , feelins : ""};
 const dataArray = [];
 
 

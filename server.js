@@ -1,5 +1,5 @@
 // Setup empty JS object to act as endpoint for all routes
-projectData = {date: "" ,city : "" , temp : "" , feelins : ""};
+projectData = {date: "" ,city : "" , temp : "" , feelings : ""};
 
 // Require Express to run server and routes
 const express = require("express");
@@ -27,7 +27,7 @@ app.get("/getTemp", function (req, res) {
 //projectData = dataArray[0];
 
   res.status(200).send(projectData);
-  console.log(projectData);
+  console.log(`projectData =${projectData} `);
   });
   
 
@@ -37,13 +37,14 @@ app.post("/setTemp", function (req, res) {
 // save request data into projectData Object
   projectData = req.body ;
 
-  //console.log(projectData);
+  
 //reply with the projectData to update UI in app.js
 res.status(200).send(projectData)
 
   });
 
-// Setup Server
+//  Setup Server
+
 //set port
 const port = 8080;
 //listening action

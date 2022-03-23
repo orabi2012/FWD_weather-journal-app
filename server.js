@@ -1,10 +1,5 @@
 // Setup empty JS object to act as endpoint for all routes
 projectData = {date: "" ,city : "" , temp : "" , feelins : ""};
-const dataArray = [];
-
-
-
-
 
 // Require Express to run server and routes
 const express = require("express");
@@ -22,48 +17,39 @@ app.use(bodyParser.json());
 const cors = require("cors");
 app.use(cors());
 
-
-
-
-
 // Initialize the main project folder
  app.use(express.static('website'));
 
 
- //get
+ //getEndPoint For testing API Get resultwith Postman
 app.get("/getTemp", function (req, res) {
   
-projectData = dataArray[0];
+//projectData = dataArray[0];
 
   res.status(200).send(projectData);
   console.log(projectData);
   });
   
 
-   //get
+   //post
 app.post("/setTemp", function (req, res) {
   
-  let data1 = req.body;
-  console.log(data1);
+// save request data into projectData Object
+  projectData = req.body ;
 
-
-//console.log(req.body)
-
-dataArray.push(req.body)
-res.status(200).send(req.body)
+  //console.log(projectData);
+//reply with the projectData to update UI in app.js
+res.status(200).send(projectData)
 
   });
 
 // Setup Server
+//set port
 const port = 8080;
+//listening action
+const server = app.listen(port, listening);
 
-
-
-  
-
-
-  const server = app.listen(port, listening);
-
+//listening function (run with server starting)
 function listening() {
-    console.log(`Hi all - server is running on port ${port}`);
+    console.log(`I am Node Js server : running at port ${port}`);
   }

@@ -9,6 +9,7 @@ body{
 }
 .contact-form .form-control{
     border-radius:1rem;
+    text-align: center;
 }
 .contact-image{
     text-align: center;
@@ -51,3 +52,4 @@ body{
     border: none;
     cursor: pointer;
 }
+

@@ -16,7 +16,7 @@ body{
 text-align: center;
 /* border: solid black thin; */
 background-color: white;
-height: 90%;
+height: 50%;
 padding: auto;
 
 
@@ -30,6 +30,7 @@ padding: auto;
     height: 22%;
     margin-bottom: 10px;
     margin-top: 10px;
+    min-height: 40px;
    
     
     

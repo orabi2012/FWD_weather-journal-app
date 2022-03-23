@@ -10,6 +10,7 @@ let newDate = `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`;
 //get html Elements by ID
 const btnGenerate = document.getElementById("btnGenerate");
 const txtContent = document.getElementById("content");
+let txtfeelings = document.getElementById("feelings").value;
 
 //event listiner
 btnGenerate.addEventListener("click", btnGenerateClick);
@@ -18,8 +19,7 @@ btnGenerate.addEventListener("click", btnGenerateClick);
 async function btnGenerateClick() {
   //get ZIP code from UI
   const ZipCode = document.getElementById("zip").value;
-  //get Feeling From UI
-  const txtfeelings = document.getElementById("feelings").value;
+
   //combine weather API request URL
   const weatherUrl = `${basicUrl}zip=${ZipCode},us&appid=${ApiKey}&units=${ApiUnit}`;
 
@@ -29,43 +29,64 @@ async function btnGenerateClick() {
 
   const Data = await fetch(weatherUrl);
 
-  if (Data.status === 200) {
-    const jdata = await Data.json();
+  const wDt = await getWeatherData(Data);
+}
 
-    temp = `${jdata["main"]["temp"]} °C `;
+const getWeatherData = async (data = {}) => {
 
-    city = jdata.name;
+  console.log(data.status)
+  //if request successed 
+  if (data.status === 200) {
 
+//convert data to json formate
+    data = await data.json();
+//extract Temp from response
+    temp = `${data["main"]["temp"]} °C `;
+
+//extract City from response
+    city = data.name;
+
+    //get Feeling From UI
+    feelings = txtfeelings.value;
+
+    //post data to server side
     const response = await postWeatherData("/setTemp", {
       date: newDate,
       city: city,
       temp: temp,
-      feelins: txtfeelings,
+      feelins: feelings,
     });
 
-  //  console.log(`response.status ${response.status}`);
+    //  update User UI
 
     txtContent.innerHTML = `City :- ${response.city}   <hr>
                                  Temp :- ${response.temp} <hr>
                                   date :- ${response.date} <hr>
                                  feeling :- ${response.feelins}`;
 
-    //console.log( city + "=" + temp)
+    //change style 
     txtContent.style.border = "green solid";
   } else {
+
+     //if request NOT successed 
+
+    console.log("Not found");
+    //updete UI
+    txtContent.innerHTML = `Not found`;
+     //change style 
+    txtContent.style.border = "red solid";
+
+    //post empty data object to server side
     const response = await postWeatherData("/setTemp", {
       date: "",
       city: "",
       temp: "",
       feelins: "",
     });
-    console.log("Not found");
-    txtContent.innerHTML = `Not found`;
-    txtContent.style.border = "red solid";
-  }
 
-  
-}
+    
+  }
+};
 
 const postWeatherData = async (url = "", data = {}) => {
   // console.log(data);

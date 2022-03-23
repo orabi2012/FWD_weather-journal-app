@@ -9,7 +9,8 @@ let newDate = `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`;
 
 //get html Elements by ID
 const btnGenerate = document.getElementById("generate");
-const txtContent = document.getElementById("content");
+const txtentryHolder = document.getElementById("entryHolder");
+
 let txtfeelings = document.getElementById("feelings");
 
 //event listiner
@@ -23,9 +24,7 @@ async function btnGenerateClick() {
   //combine weather API request URL
   const weatherUrl = `${basicUrl}zip=${ZipCode},us&appid=${ApiKey}&units=${ApiUnit}`;
 
-  //variable to store city name
-  //let city = "";
-  //let temp = "";
+  
 
   const Data = await fetch(weatherUrl);
 
@@ -39,40 +38,45 @@ const getWeatherData = async (data = {}) => {
     //convert data to json formate
     const newdata = await data.json();
     //extract Temp from response
-    temp = `${newdata["main"]["temp"]} °C `;
+    temp = `${newdata["main"]["temp"]}`;
 
     //extract City from response
     city = newdata.name;
 
     //get Feeling From UI
-    const feelings = txtfeelings.value;
+    const feel = txtfeelings.value;
 
     //post data to server side
     const response = await postWeatherData("/setTemp", {
       date: newDate,
       city: city,
       temp: temp,
-      feelings: feelings,
+      feel: feel,
     });
 
     //  update User UI
-
-    txtContent.innerHTML = `City :- ${response.city}   <hr>
-                                 Temp :- ${response.temp} <hr>
-                                  date :- ${response.date} <hr>
-                                 feeling :- ${response.feelings}`;
-
+    document.getElementById("city").innerHTML = response.city;
+    document.getElementById("temp").innerHTML = Math.round(response.temp) + " degrees";
+    document.getElementById("content").innerHTML = response.feel;
+    document.getElementById("date").innerHTML = response.date;
     //change style
-    txtContent.style.border = "green solid";
+    document.getElementById("entryHolder").style.backgroundColor = "#33cccc"
+
+    
+    
   } else {
     //if request NOT successed
 
     console.log("Not found");
     //updete UI
-    txtContent.innerHTML = `Not found`;
-    //change style
-    txtContent.style.border = "red solid";
-
+    document.getElementById("city").innerHTML = "Not Found";
+    document.getElementById("temp").innerHTML = "";
+    document.getElementById("content").innerHTML = "";
+    document.getElementById("date").innerHTML = "";
+     //change style
+    document.getElementById("entryHolder").style.backgroundColor = "red"
+   
+   
     //post empty data object to server side
     const response = await postWeatherData("/setTemp", {
       date: "",

@@ -11,8 +11,16 @@ body{
     border-radius:1rem;
     text-align: center;
 }
+.contact-form #entryHolder{
+
+text-align: center;
+/* border: solid black thin; */
+background-color: #bee1eb;
+height: inherit;
+}
 .contact-image{
     text-align: center;
+   
 }
 .contact-image img{
     border-radius: 6rem;

@@ -25,7 +25,9 @@
 
         <div class="row">
           <div class="col-md-6">
-            <div class="form-group">
+            <div class="form-group"> 
+
+              
               <label for="zip">Enter Zipcode here</label>
               <input
                 type="number"
@@ -36,20 +38,15 @@
             </div>
             <div class="form-group">
               <label for="feelings">How are you feeling today?</label>
-              <input
-                type="text"
-                id="feelings"
-                class="form-control"
-                placeholder="How are you feeling today?"
-              />
+              <textarea class= "form-control" id="feelings" placeholder="Enter your feelings here" rows="9" cols="50" ></textarea>
+             
             </div>
 
             <div class="form-group">
-              <label for="btnGenerate"></label>
+              <label for="generate"></label>
               <button
                 id="generate"
                 type="button"
-                name="btnSubmit"
                 class="btnContactSubmit"
               >
                 Generate
@@ -57,14 +54,25 @@
             </div>
           </div>
           <div class="col-md-6">
-            <div class="form-group">
-              <label for="feelings">Most Recent Entry</label>
-              <label
-                id="content"
-                class="form-control"
-                placeholder="Most Recent Entry"
-                style="width: 100%; height: 250px"
-              ></label>
+            
+            <div class = "title">Most Recent Entry</div>
+   <div id = "entryHolder">
+    <div id = "city"></div>
+    <div id = "date"></div> 
+   <div id = "temp"></div>
+   <div id = "content"></div>
+
+  </div>
+
+
+            </div>
+
+
+            </div>
+
+            
+
+
             </div>
           </div>
         </div>

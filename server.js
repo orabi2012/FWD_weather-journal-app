@@ -1,5 +1,5 @@
 // Setup empty JS object to act as endpoint for all routes
-projectData = {date: "" ,city : "" , temp : "" , feelings : ""};
+projectData = {date: "" ,city : "" , temp : "" , feel : ""};
 
 // Require Express to run server and routes
 const express = require("express");

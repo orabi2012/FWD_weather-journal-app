@@ -46,7 +46,7 @@ res.status(200).send(projectData)
 //  Setup Server
 
 //set port
-const port = 8080;
+const port = process.env.PORT || 8080
 //listening action
 const server = app.listen(port, listening);
 

@@ -60,7 +60,7 @@ const getWeatherData = async (data = {}) => {
     document.getElementById("content").innerHTML = response.feel;
     document.getElementById("date").innerHTML = response.date;
     //change style
-    document.getElementById("entryHolder").style.backgroundColor = "#33cccc"
+    document.getElementById("entryHolder").style.backgroundColor = "#00C2FF"
 
     
     

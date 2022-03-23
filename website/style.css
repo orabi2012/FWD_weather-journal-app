@@ -15,9 +15,25 @@ body{
 
 text-align: center;
 /* border: solid black thin; */
-background-color: #bee1eb;
-height: inherit;
+background-color: white;
+height: 90%;
+padding: auto;
+
+
 }
+
+.contact-form #entryHolder div{
+
+    text-align: center;
+    /* border: solid black thin; */
+    background-color: white;
+    height: 25%;
+    margin-bottom: 10px;
+    margin-top: 10px;
+   
+    
+    
+    }
 .contact-image{
     text-align: center;
    
